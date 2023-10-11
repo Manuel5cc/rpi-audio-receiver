@@ -55,4 +55,5 @@ echo "Installing components"
 ./install-bluetooth.sh
 ./install-shairport.sh
 ./install-spotify.sh
+./install-snapcast.sh
 ./enable-hifiberry.sh
