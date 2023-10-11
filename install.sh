@@ -2,22 +2,12 @@
 
 if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 
-# Get the current pretty hostname
-CURRENT_PRETTY_HOSTNAME=$(hostnamectl --static status --pretty)
+read -p "Hostname: " HOSTNAME
+raspi-config nonint do_hostname ${HOSTNAME}
 
-# Prompt the user for the new pretty hostname
-read -p "Pretty hostname [${CURRENT_PRETTY_HOSTNAME:-Raspberry Pi}]: " PRETTY_HOSTNAME
-
-# Set the new pretty hostname
-PRETTY_HOSTNAME=${PRETTY_HOSTNAME:-$CURRENT_PRETTY_HOSTNAME}
-hostnamectl set-hostname --pretty "$PRETTY_HOSTNAME"
-
-# Check if the operation was successful
-if [ $? -eq 0 ]; then
-  echo "Pretty hostname has been set to: $PRETTY_HOSTNAME"
-else
-  echo "Failed to set the pretty hostname."
-fi
+CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)
+read -p "Pretty hostname: " PRETTY_HOSTNAME
+hostnamectl set-hostname --pretty "${PRETTY_HOSTNAME}"
 
 echo "Updating packages"
 apt update
