@@ -7,7 +7,7 @@ raspi-config nonint do_hostname ${HOSTNAME}
 
 CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)
 read -p "Pretty hostname: " PRETTY_HOSTNAME
-hostnamectl set-hostname --pretty "${PRETTY_HOSTNAME}"
+hostnamectl set-hostname --pretty ${PRETTY_HOSTNAME}
 
 echo "Updating packages"
 apt update
