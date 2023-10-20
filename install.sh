@@ -45,6 +45,4 @@ echo "Installing components"
 ./install-bluetooth.sh
 ./install-shairport.sh
 ./install-spotify.sh
-chmod +x install-snapcast.sh
-./install-snapcast.sh
 ./enable-hifiberry.sh
