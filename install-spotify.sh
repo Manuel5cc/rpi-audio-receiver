@@ -7,6 +7,8 @@ echo -n "Do you want to install Spotify Connect (Raspotify)? [y/N] "
 read REPLY
 if [[ ! "$REPLY" =~ ^(yes|y|Y)$ ]]; then exit 0; fi
 
+read -p "Initial Volume when connecting from 0 to 100: " VAR_INIT_VOL
+
 curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
 
 PRETTY_HOSTNAME=$(hostnamectl status --pretty | tr ' ' '-')
@@ -21,7 +23,7 @@ LIBRESPOT_ENABLE_VOLUME_NORMALISATION=
 LIBRESPOT_NAME="${PRETTY_HOSTNAME}"
 LIBRESPOT_DEVICE_TYPE="avr"
 LIBRESPOT_BITRATE="320"
-LIBRESPOT_INITIAL_VOLUME="35"
+LIBRESPOT_INITIAL_VOLUME="${VAR_INIT_VOL}"
 EOF
 
 mkdir -p /etc/systemd/system/raspotify.service.d
